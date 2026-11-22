@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LinkLocker keeps your team's useful links organized, searchable and easy to share.">
+  <meta name="theme-color" content="#6d4aff">
+  <title>LinkLocker — KnowledgeKeep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="LinkLocker home">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a4.5 4.5 0 0 0 6.4 0l2-2a4.5 4.5 0 0 0-6.4-6.4l-1.15 1.15M13.4 10.6a4.5 4.5 0 0 0-6.4 0l-2 2a4.5 4.5 0 0 0 6.4 6.4l1.15-1.15" /></svg></span>
+        <span>Link<span class="brand-light">Locker</span><small>KNOWLEDGEKEEP</small></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="all"><span class="nav-icon">▦</span> All bookmarks <span class="nav-count" id="allCount">24</span></button>
+        <button class="nav-item" data-view="favorites"><span class="nav-icon">♡</span> Favorites</button>
+        <button class="nav-item" data-view="pinned"><span class="nav-icon">⌖</span> Pinned links</button>
+      </nav>
+
+      <div class="sidebar-label collection-heading"><span>COLLECTIONS</span><button class="icon-button small" id="addCollectionBtn" aria-label="Add collection" title="Add collection">＋</button></div>
+      <nav class="collection-nav" id="collectionNav" aria-label="Collections"></nav>
+
+      <div class="sidebar-bottom">
+        <div class="storage-card">
+          <div class="storage-icon">✦</div>
+          <strong>Your knowledge, in one place.</strong>
+          <p>Keep useful resources close and your team in sync.</p>
+        </div>
+        <button class="nav-item" data-view="backup"><span class="nav-icon">⇧</span> Backup & restore</button>
+        <div class="profile-row"><div class="avatar">LK</div><div><strong>Knowledge Team</strong><small>Personal workspace</small></div><span class="profile-dot"></span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+        <div class="breadcrumbs"><span>Workspace</span><span class="crumb-sep">/</span><strong id="breadcrumbTitle">All bookmarks</strong></div>
+        <div class="top-actions">
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search links, notes, tags..." autocomplete="off"><kbd>⌘ K</kbd></label>
+          <button class="button button-primary" id="openAddModal"><span>＋</span> Add link</button>
+        </div>
+      </header>
+
+      <section class="page-content">
+        <div class="welcome-row">
+          <div><div class="eyebrow"><span class="eyebrow-dot"></span> YOUR TEAM KNOWLEDGE HUB</div><h1 id="pageTitle">All bookmarks<span class="title-period">.</span></h1><p class="page-subtitle" id="pageSubtitle">A tidy home for the links worth keeping.</p></div>
+          <div class="date-pill"><span class="date-spark">✧</span> Your resource library</div>
+        </div>
+
+        <section class="stats-grid" aria-label="Bookmark statistics">
+          <article class="stat-card"><div class="stat-top"><span>Total bookmarks</span><span class="stat-icon purple">▤</span></div><strong id="statTotal">24</strong><small><span class="stat-trend">↗</span> Your saved resources</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Collections</span><span class="stat-icon peach">▣</span></div><strong id="statCollections">4</strong><small>Organized workspaces</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Favorite links</span><span class="stat-icon yellow">♡</span></div><strong id="statFavorites">4</strong><small>Quick access resources</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Unique tags</span><span class="stat-icon mint">⌗</span></div><strong id="statTags">0</strong><small>Ways to explore</small></article>
+        </section>
+
+        <section class="pinned-section" id="pinnedSection">
+          <div class="section-heading"><div><span class="section-kicker">QUICK ACCESS</span><h2>Pinned for your team <span class="pin-emoji">✦</span></h2></div><button class="text-button" data-view="pinned">View all <span>→</span></button></div>
+          <div class="pinned-list" id="pinnedList"></div>
+        </section>
+
+        <section class="library-section">
+          <div class="section-heading library-heading"><div><span class="section-kicker">THE LIBRARY</span><h2 id="libraryHeading">Recently saved</h2></div><div class="view-tools"><label class="select-wrap"><span>Domain</span><select id="domainFilter"><option value="">All domains</option></select></label><button class="icon-button view-toggle active" id="gridViewBtn" title="Grid view" aria-label="Grid view">▦</button></div></div>
+          <div class="active-filters" id="activeFilters"></div>
+          <div class="tag-strip" id="tagStrip" aria-label="Filter by tag"></div>
+          <div class="bookmark-grid" id="bookmarkGrid"></div>
+          <div class="empty-state hidden" id="emptyState"><div class="empty-illustration">⌕</div><h3>No links found</h3><p>Try a different search or clear your filters.</p><button class="button button-secondary" id="clearFiltersBtn">Clear filters</button></div>
+        </section>
+        <footer class="page-footer"><span>Made for curious teams <span class="footer-heart">♥</span></span><span>LinkLocker <span class="footer-version">v1.0</span></span></footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="bookmarkModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-header"><div><span class="section-kicker">SAVE SOMETHING USEFUL</span><h2 id="modalTitle">Add a bookmark</h2><p>Keep a great resource within reach.</p></div><button class="icon-button close-modal" data-close="bookmarkModal" aria-label="Close">×</button></div>
+      <form id="bookmarkForm">
+        <input type="hidden" id="bookmarkId">
+        <label class="field-label" for="bookmarkUrl">Website URL <span>*</span></label><input class="text-input" id="bookmarkUrl" type="url" placeholder="https://example.com" required>
+        <div class="form-row"><div class="form-field"><label class="field-label" for="bookmarkTitle">Title <span>*</span></label><input class="text-input" id="bookmarkTitle" type="text" placeholder="e.g. React Documentation" required maxlength="100"></div><div class="form-field"><label class="field-label" for="bookmarkCollection">Collection</label><select class="text-input" id="bookmarkCollection"></select></div></div>
+        <label class="field-label" for="bookmarkDescription">Description / notes</label><textarea class="text-input textarea" id="bookmarkDescription" rows="3" placeholder="What makes this resource useful?" maxlength="240"></textarea>
+        <label class="field-label" for="bookmarkTags">Tags <small>Separate with commas</small></label><input class="text-input" id="bookmarkTags" type="text" placeholder="react, tutorial, api">
+        <div class="modal-checks"><label><input type="checkbox" id="bookmarkFavorite"> <span>♡</span> Add to favorites</label><label><input type="checkbox" id="bookmarkPinned"> <span>⌖</span> Pin for quick access</label></div>
+        <div class="modal-actions"><button type="button" class="button button-secondary" data-close="bookmarkModal">Cancel</button><button type="submit" class="button button-primary" id="saveBookmarkBtn">Save bookmark <span>→</span></button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="collectionModal" role="dialog" aria-modal="true" aria-labelledby="collectionModalTitle">
+    <div class="modal compact-modal"><div class="modal-header"><div><span class="section-kicker">STAY ORGANIZED</span><h2 id="collectionModalTitle">New collection</h2><p>Create a space for related links.</p></div><button class="icon-button close-modal" data-close="collectionModal" aria-label="Close">×</button></div>
+      <form id="collectionForm"><label class="field-label" for="collectionName">Collection name <span>*</span></label><input class="text-input" id="collectionName" maxlength="40" placeholder="e.g. Product Research" required><div class="modal-actions"><button type="button" class="button button-secondary" data-close="collectionModal">Cancel</button><button class="button button-primary" type="submit">Create collection</button></div></form>
+    </div>
+  </div>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <input type="file" id="importFile" accept=".json,application/json" hidden>
+  <script src="script.js"></script>
+</body>
+</html>
